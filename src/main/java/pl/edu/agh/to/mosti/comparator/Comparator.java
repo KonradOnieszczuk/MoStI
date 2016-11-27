@@ -1,5 +1,6 @@
 package pl.edu.agh.to.mosti.comparator;
 
+import pl.edu.agh.to.mosti.model.ObservedSection;
 import pl.edu.agh.to.mosti.notifier.Notifier;
 
 public interface Comparator {
@@ -13,14 +14,13 @@ public interface Comparator {
     public void setNotifier(Notifier notifier);
 
     /**
-     * Given an id of an {@link pl.edu.agh.to.mosti.model.ObservedPageSection}
-     * and a new content of that section, checks whether there was a change in
-     * that section's content.
+     * Given an id of an {@link ObservedSection} and a new content of that
+     * section, checks whether there was a change in that section's content.
      *
      * @param observedPageSectionId id of a page section that's being observed
      * @param currentContent current content of that section
      *
-     * @see pl.edu.agh.to.mosti.model.ObservedPageSection
+     * @see ObservedSection
      */
     public void checkSnapshot(long observedPageSectionId, String currentContent);
 
