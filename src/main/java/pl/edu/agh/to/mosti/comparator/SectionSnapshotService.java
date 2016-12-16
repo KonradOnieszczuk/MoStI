@@ -1,8 +1,10 @@
 package pl.edu.agh.to.mosti.comparator;
 
+import org.springframework.stereotype.Service;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 
+@Service
 class SectionSnapshotService {
     private final SectionSnapshotDao sectionSnapshotDao;
 

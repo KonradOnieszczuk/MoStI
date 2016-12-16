@@ -1,6 +1,7 @@
 package pl.edu.agh.to.mosti.comparator;
 
 import javafx.util.Pair;
+import org.springframework.stereotype.Component;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 import pl.edu.agh.to.mosti.notifier.NotificationType;
 import pl.edu.agh.to.mosti.notifier.Notifier;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+@Component
 public final class ContentComparator implements Comparator {
 
     private final SectionService sectionService;

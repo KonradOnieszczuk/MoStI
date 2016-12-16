@@ -1,9 +1,11 @@
 package pl.edu.agh.to.mosti.comparator;
 
+import org.springframework.stereotype.Service;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 
 import java.util.List;
 
+@Service
 public final class SectionService {
 
     private final SectionDao sectionDao;
