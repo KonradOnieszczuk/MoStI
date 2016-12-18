@@ -1,7 +1,6 @@
 package pl.edu.agh.to.mosti.comparator;
 
 import pl.edu.agh.to.mosti.comparator.model.Section;
-
 import java.util.List;
 
 final class RdbSectionDao extends SectionDao {

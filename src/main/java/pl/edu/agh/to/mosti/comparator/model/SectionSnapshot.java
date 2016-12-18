@@ -2,8 +2,16 @@ package pl.edu.agh.to.mosti.comparator.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class SectionSnapshot {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private Section section;
     private String content;
@@ -45,5 +53,12 @@ public class SectionSnapshot {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "Section[id=%d, section='%s', content='%s', date='%s']",
+                id, section, content, date);
     }
 }
