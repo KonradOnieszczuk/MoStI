@@ -1,9 +1,7 @@
 package pl.edu.agh.to.mosti.comparator.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Section {
@@ -18,7 +16,11 @@ public class Section {
     // This field holds e-mail address to sent notification to.
     private String contactInfo;
 
-    protected Section() {
+    @OneToMany(mappedBy = "section")
+    private List<SectionSnapshot> sectionSnapshot;
+
+
+    public Section() {
 
     }
 
@@ -65,10 +67,18 @@ public class Section {
         this.contactInfo = contactInfo;
     }
 
+    public List<SectionSnapshot> getSectionSnapshot() {
+        return sectionSnapshot;
+    }
+
+    public void setSectionSnapshot(List<SectionSnapshot> sectionSnapshot) {
+        this.sectionSnapshot = sectionSnapshot;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "Section[id=%d, alias='%s', selector='%s', contactInfo='%s']",
-                id, alias, selector, contactInfo);
+                "Section[id=%d, alias='%s', selector='%s', contactInfo='%s', sectionSnapshot='%s']",
+                id, alias, selector, contactInfo, sectionSnapshot);
     }
 }

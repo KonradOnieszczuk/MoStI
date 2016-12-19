@@ -2,10 +2,7 @@ package pl.edu.agh.to.mosti.comparator.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class SectionSnapshot {
@@ -13,9 +10,12 @@ public class SectionSnapshot {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    private Section section;
     private String content;
     private Date date;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="SECTION_ID")
+    private Section section;
 
     public SectionSnapshot() {
 
