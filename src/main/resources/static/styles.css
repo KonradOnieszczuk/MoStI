@@ -9,7 +9,7 @@ body {
 }
 
 .container > div.alert,
-.container > div.media {
+.container > ul.media-list {
     margin: 60px auto;
 }
 

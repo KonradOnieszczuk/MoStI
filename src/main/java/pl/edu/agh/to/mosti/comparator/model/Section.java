@@ -19,6 +19,7 @@ public class Section {
     private String url;
     private String alias;
     private String selector;
+    private int interval;
 
     // For the first iteration we're supporting only EMAIL notification type.
     // This field holds e-mail address to send notifications to.
@@ -28,10 +29,11 @@ public class Section {
     private List<SectionSnapshot> sectionSnapshot = new LinkedList<>();
 
     public Section(String url, String alias, String selector,
-                   String contactInfo) {
+                   String contactInfo, int interval) {
         this.url = url;
         this.alias = alias;
         this.selector = selector;
         this.contactInfo = contactInfo;
+        this.interval = interval;
     }
 }

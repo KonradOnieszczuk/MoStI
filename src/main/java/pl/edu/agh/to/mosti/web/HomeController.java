@@ -1,12 +1,10 @@
 package pl.edu.agh.to.mosti.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.to.mosti.comparator.SectionService;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 
@@ -33,5 +31,11 @@ public class HomeController {
     public String addSection(@ModelAttribute Section section, Model model) {
         sectionService.saveOrUpdateSection(section);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/delete-section/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteSection(@PathVariable("id") long id) {
+        sectionService.deleteSection(sectionService.getSectionById(id));
     }
 }
