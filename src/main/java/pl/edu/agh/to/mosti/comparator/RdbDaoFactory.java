@@ -1,20 +1,25 @@
 package pl.edu.agh.to.mosti.comparator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 class RdbDaoFactory extends DaoFactory {
 
-    @Bean
+    @Autowired private RdbSectionDao rdbSectionDao;
+    @Autowired private RdbSectionSnapshotDao rdbSectionSnapshotDao;
+
+    @Bean @Primary
     @Override
     protected SectionDao getSectionDao() {
-        return new RdbSectionDao();
+        return rdbSectionDao;
     }
 
-    @Bean
+    @Bean @Primary
     @Override
     protected SectionSnapshotDao getSectionSnapshotDao() {
-        return new RdbSectionSnapshotDao();
+        return rdbSectionSnapshotDao;
     }
 }
