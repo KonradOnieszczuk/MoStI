@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="container">
+    <h1>Monitor Stron Internetowych</h1>
+    <div th:if="${not #lists.isEmpty(sections)}" class="media">
+        <div th:each="sec : ${sections}" class="media-body">
+            <h4 class="media-heading" th:text="${sec.alias}"></h4>
+            <h5>
+                Url: <span class="label label-default" th:text="${sec.url}"></span>
+                Selector: <span class="label label-default" th:text="${sec.selector}"></span>
+                Contact Info: <span class="label label-default" th:text="${sec.contactInfo}"></span>
+            </h5>
+        </div>
+    </div>
+    <div th:if="${#lists.isEmpty(sections)}" class="alert alert-info center-block text-center" role="alert">Currently no sections are being observed.</div>
+    <form class="form-horizontal center-block" action="#" th:action="@{/add-section}" th:object="${section}" method="post">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="alias">Alias</label>
+                <input type="text" class="form-control" id="alias" placeholder="My new page" th:field="*{alias}" />
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="url">Url</label>
+                <input type="text" class="form-control" id="url" placeholder="http://google.com" th:field="*{url}" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="selector">Selector</label>
+                <input type="text" class="form-control" id="selector" placeholder="div.amazing-class" th:field="*{selector}" />
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="contactInfo">Contact Info</label>
+                <input type="text" class="form-control" id="contactInfo" placeholder="johndoe@doe.com" th:field="*{contactInfo}" />
+            </div>
+        </div>
+        <div class="form-group pull-right">
+            <button type="submit" class="btn btn-success">Add section</button>
+        </div>
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

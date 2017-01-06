@@ -16,7 +16,7 @@ public class Section {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    private String pageUrl;
+    private String url;
     private String alias;
     private String selector;
 
@@ -27,9 +27,9 @@ public class Section {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "section")
     private List<SectionSnapshot> sectionSnapshot = new LinkedList<>();
 
-    public Section(String pageUrl, String alias, String selector,
+    public Section(String url, String alias, String selector,
                    String contactInfo) {
-        this.pageUrl = pageUrl;
+        this.url = url;
         this.alias = alias;
         this.selector = selector;
         this.contactInfo = contactInfo;
