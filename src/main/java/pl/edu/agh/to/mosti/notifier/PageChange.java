@@ -10,8 +10,6 @@ public class PageChange {
     private String url;
     private String oldValue;
     private String newValue;
-    private List<Pair<NotificationType, String>> notificationMethods;   //String is address or identifier used to send
-    // message
 
     public String getTitle() {
         return title;
@@ -43,13 +41,5 @@ public class PageChange {
 
     public void setNewValue(String newValue) {
         this.newValue = newValue;
-    }
-
-    public List<Pair<NotificationType, String>> getNotificationMethods() {
-        return notificationMethods;
-    }
-
-    public void setNotificationMethods(List<Pair<NotificationType, String>> notificationMethods) {
-        this.notificationMethods = notificationMethods;
     }
 }

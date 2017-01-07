@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailSender implements NotificationSender {
 
 
-    public void sendNotification(String message, String address) {
+    public void sendNotification(PageChange pageChange, String address) {
 
         final String username = "mosti.notification@gmail.com";
         final String password = "notificationsender";
@@ -38,14 +38,23 @@ public class EmailSender implements NotificationSender {
             email.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(address));
             email.setSubject("Testing Notification");
-            email.setText(message);
+            email.setText(getMessage(pageChange));
 
-            Transport.send(email);
+            Transport transport = session.getTransport("smtp");
+            transport.connect();
+            transport.sendMessage(email, email.getAllRecipients());
+            transport.close();
 
             System.out.println("Done");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /** Formats message to be sent out */
+    private String getMessage (PageChange pageChange) {
+        return "Notification of change in  " + pageChange.getTitle() + " page. " + pageChange.getNewValue() + " is " +
+                "now " + pageChange.getNewValue();
     }
 }

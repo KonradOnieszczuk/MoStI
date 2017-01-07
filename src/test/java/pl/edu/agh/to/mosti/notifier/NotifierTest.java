@@ -13,11 +13,12 @@ public class NotifierTest {
         NotificationSenderFactory factory = new NotificationSenderFactory();
         try {
             NotificationSender sender = factory.provideNotificationSender(NotificationType.email);
-            sender.sendNotification("hello world", testAddress);
+            PageChange pg = new PageChange();
+            sender.sendNotification(pg, testAddress);
         } catch (InvalidNotificationType invalidNotificationType) {
             invalidNotificationType.printStackTrace();
             fail();
         }
     }
-
+/* Mail session, test fabryki */
 }
