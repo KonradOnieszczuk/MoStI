@@ -6,15 +6,15 @@ import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 
 @Service
-class SectionSnapshotService {
+public class SectionSnapshotService {
     private final SectionSnapshotDao sectionSnapshotDao;
 
     @Autowired
-    SectionSnapshotService(SectionSnapshotDao sectionSnapshotDao) {
+    public SectionSnapshotService(SectionSnapshotDao sectionSnapshotDao) {
         this.sectionSnapshotDao = sectionSnapshotDao;
     }
 
-    SectionSnapshot getLatestSectionSnapshot(Section section) {
+    public SectionSnapshot getLatestSectionSnapshot(Section section) {
         return sectionSnapshotDao.findFirstBySectionIdOrderByDateDesc(section.getId());
     }
 

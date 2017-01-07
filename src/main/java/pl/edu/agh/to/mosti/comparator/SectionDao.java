@@ -4,7 +4,7 @@ import pl.edu.agh.to.mosti.comparator.model.Section;
 
 import java.util.List;
 
-interface SectionDao {
+public interface SectionDao {
     List<Section> findAll();
     Section getOne(long id);
     Section save(Section section);

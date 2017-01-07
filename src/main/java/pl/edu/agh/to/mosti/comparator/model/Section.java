@@ -1,5 +1,8 @@
 package pl.edu.agh.to.mosti.comparator.model;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,4 +39,5 @@ public class Section {
         this.contactInfo = contactInfo;
         this.interval = interval;
     }
+
 }
