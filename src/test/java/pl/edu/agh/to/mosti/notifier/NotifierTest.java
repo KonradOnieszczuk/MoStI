@@ -8,7 +8,7 @@ public class NotifierTest {
     @Test
     public void emailNotificationTest(){
 
-        final String testAddress = "";        //insert address before test
+        final String testAddress = "ggorska.a@gmail.com";        //insert address before test
 
         NotificationSenderFactory factory = new NotificationSenderFactory();
         try {
@@ -20,5 +20,12 @@ public class NotifierTest {
             fail();
         }
     }
-/* Mail session, test fabryki */
+
+    @Test
+    public void senderFactoryTest() {
+        NotificationSenderFactory factory = new NotificationSenderFactory();
+
+        //assert(factory.provideNotificationSender(NotificationType.email)
+    }
+/* Mail session */
 }
