@@ -25,11 +25,12 @@ public final class ContentComparator implements Comparator {
     }
 
     @Override
-    public void compare(long id, String content) throws NoSuchSectionException {
+    public void compare(long id, String newContent) {
         Section section;
 
         try {
             section = sectionService.getSectionById(id);
+            section.getId();
         } catch (EntityNotFoundException ex) {
             throw new NoSuchSectionException();
         }
@@ -37,8 +38,8 @@ public final class ContentComparator implements Comparator {
         SectionSnapshot sectionSnapshot = sectionSnapshotService.getLatestSectionSnapshot(section);
         String previousContent = sectionSnapshot != null ? sectionSnapshot.getContent() : null;
 
-        if (!content.equals(previousContent)) {
-            sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, content, new Date()));
+        if (!newContent.equals(previousContent)) {
+            sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, newContent, new Date()));
 
             if (notifier != null && previousContent != null) {
                 // use notifier

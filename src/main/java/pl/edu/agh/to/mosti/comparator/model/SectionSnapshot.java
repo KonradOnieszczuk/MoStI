@@ -19,7 +19,7 @@ public class SectionSnapshot {
     private String content;
     private Date date;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="section_id")
     private Section section;
 
