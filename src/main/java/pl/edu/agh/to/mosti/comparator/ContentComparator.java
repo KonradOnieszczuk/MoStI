@@ -6,6 +6,7 @@ import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 import pl.edu.agh.to.mosti.notifier.Notifier;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 
 @Component
@@ -25,9 +26,11 @@ public final class ContentComparator implements Comparator {
 
     @Override
     public void compare(long id, String content) throws NoSuchSectionException {
-        Section section = sectionService.getSectionById(id);
+        Section section;
 
-        if (section == null) {
+        try {
+            section = sectionService.getSectionById(id);
+        } catch (EntityNotFoundException ex) {
             throw new NoSuchSectionException();
         }
 

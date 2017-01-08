@@ -23,8 +23,8 @@ public final class SectionService {
         return sectionDao.findAll();
     }
 
-    public void saveOrUpdateSection(Section section) {
-        sectionDao.save(section);
+    public Section saveOrUpdateSection(Section section) {
+        return sectionDao.save(section);
     }
 
     public void deleteSection(Section section) {
