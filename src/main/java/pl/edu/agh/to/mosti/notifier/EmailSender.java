@@ -18,6 +18,7 @@ public class EmailSender implements NotificationSender {
         this.emailTransportFactory = transportFactory;
     }
 
+
     public void sendNotification(PageChange pageChange, String address) {
 
         final String username = "mosti.notification@gmail.com";
@@ -31,6 +32,7 @@ public class EmailSender implements NotificationSender {
                     InternetAddress.parse(address));
             email.setSubject("Testing Notification");
             email.setText(getMessage(pageChange));
+
             Transport transport = emailTransportFactory.getTransport();
             transport.connect();
             transport.sendMessage(email, email.getAllRecipients());
@@ -51,5 +53,9 @@ public class EmailSender implements NotificationSender {
                 + "to " + pageChange.getNewValue() + "\n");
         message.append("To change the notification options go to the MoStI page");
         return message.toString();
+    }
+
+    public TransportFactory getTransportFactory(){
+        return emailTransportFactory;
     }
 }
