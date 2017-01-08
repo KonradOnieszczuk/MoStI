@@ -28,9 +28,6 @@ public class SectionServiceTest {
 
     private List<Section> testSections = new LinkedList<>();
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Before
     public void addTestData() {
         for (int i = 0; i < 5; i++) {
