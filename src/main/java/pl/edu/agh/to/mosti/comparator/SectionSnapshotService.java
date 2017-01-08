@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 
+import java.util.List;
+
 @Service
 public class SectionSnapshotService {
     private final SectionSnapshotDao sectionSnapshotDao;
@@ -20,5 +22,9 @@ public class SectionSnapshotService {
 
     void saveSnapshot(SectionSnapshot sectionSnapshot) {
         sectionSnapshotDao.save(sectionSnapshot);
+    }
+
+    public List<SectionSnapshot> findBySectionId(long id) {
+        return sectionSnapshotDao.findBySectionId(id);
     }
 }
