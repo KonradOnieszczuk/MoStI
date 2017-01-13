@@ -24,7 +24,7 @@ public class Section {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "section")
     private List<SectionSnapshot> sectionSnapshot = new LinkedList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "section_notification",
             joinColumns = @JoinColumn(name = "section_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "notification_id", referencedColumnName = "id"))
