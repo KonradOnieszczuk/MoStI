@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.to.mosti.comparator.SectionService;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 
-import java.util.List;
-
 @Controller
 public class HomeController {
 
@@ -27,7 +25,7 @@ public class HomeController {
         return "home";
     }
 
-    @PostMapping("/add-section")
+    @PostMapping("/section-mng")
     public String addSection(@ModelAttribute Section section, Model model) {
         sectionService.saveOrUpdateSection(section);
         return "redirect:/";
