@@ -21,7 +21,7 @@ public class Section {
     private String selector;
     private int interval;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "section")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "section", cascade = CascadeType.REMOVE)
     private List<SectionSnapshot> sectionSnapshot = new LinkedList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)

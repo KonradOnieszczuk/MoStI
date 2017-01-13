@@ -9,8 +9,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.to.mosti.Application;
 import pl.edu.agh.to.mosti.comparator.model.Notification;
-import pl.edu.agh.to.mosti.comparator.model.NotificationType;
 import pl.edu.agh.to.mosti.comparator.model.Section;
+import pl.edu.agh.to.mosti.notifier.NotificationType;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class SectionServiceTest {
     @Before
     public void addTestData() {
         List<Notification> notifications = new LinkedList<>();
-        notifications.add(new Notification(NotificationType.EMAIL, "mail@mail.com"));
+        notifications.add(new Notification(NotificationType.email, "mail@mail.com"));
 
         for (int i = 0; i < 5; i++) {
             testSections.add(sectionService.saveOrUpdateSection(new Section(
@@ -112,7 +112,7 @@ public class SectionServiceTest {
     public void sectionServiceShouldUpdateSectionNotificationRelation() {
         // given
         List<Notification> notifications = new LinkedList<>();
-        notifications.add(new Notification(NotificationType.EMAIL, "mail@mail.com"));
+        notifications.add(new Notification(NotificationType.email, "mail@mail.com"));
 
         Section firstSection = new Section("1", "1", "1", 0, notifications);
         Section secondSection = new Section("2", "2", "2", 0, notifications);
@@ -134,7 +134,7 @@ public class SectionServiceTest {
     public void sectionServiceShouldReturnProperNotificationsSet() {
         // given
         List<Notification> notifications = new LinkedList<>();
-        notifications.add(new Notification(NotificationType.EMAIL, "mail@mail.com"));
+        notifications.add(new Notification(NotificationType.email, "mail@mail.com"));
         Section section = sectionService.saveOrUpdateSection(new Section("u", "a", "s", 0, notifications));
 
         // when
@@ -148,7 +148,7 @@ public class SectionServiceTest {
     public void sectionServiceShouldUpdateSectionNotificationRelationOnSectionDelete() {
         // given
         List<Notification> notifications = new LinkedList<>();
-        notifications.add(new Notification(NotificationType.EMAIL, "mail@mail.com"));
+        notifications.add(new Notification(NotificationType.email, "mail@mail.com"));
         Section section = sectionService.saveOrUpdateSection(new Section("u", "a", "s", 0, notifications));
 
         // when
@@ -158,8 +158,8 @@ public class SectionServiceTest {
     @Test
     public void sectionServiceShouldPersistOnlyOneInstanceOfEqualNotifications() {
         // when
-        Section firstSection = sectionService.saveOrUpdateSection(new Section("u_1", "a_1", "s_1", 0, Arrays.asList(new Notification(NotificationType.EMAIL, "mail"))));
-        Section secondSection = sectionService.saveOrUpdateSection(new Section("u_2", "a_2", "s_2", 0, Arrays.asList(new Notification(NotificationType.EMAIL, "mail"))));
+        Section firstSection = sectionService.saveOrUpdateSection(new Section("u_1", "a_1", "s_1", 0, Arrays.asList(new Notification(NotificationType.email, "mail"))));
+        Section secondSection = sectionService.saveOrUpdateSection(new Section("u_2", "a_2", "s_2", 0, Arrays.asList(new Notification(NotificationType.email, "mail"))));
 
         // then
         assertEquals(firstSection.getNotifications().get(0).getId(), secondSection.getNotifications().get(0).getId());

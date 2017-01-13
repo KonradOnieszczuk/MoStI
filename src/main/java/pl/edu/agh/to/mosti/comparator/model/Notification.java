@@ -3,6 +3,7 @@ package pl.edu.agh.to.mosti.comparator.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import pl.edu.agh.to.mosti.notifier.NotificationType;
 
 import javax.persistence.*;
 import java.util.List;

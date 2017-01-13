@@ -1,7 +1,7 @@
 package pl.edu.agh.to.mosti.comparator;
 
 import pl.edu.agh.to.mosti.comparator.model.Notification;
-import pl.edu.agh.to.mosti.comparator.model.NotificationType;
+import pl.edu.agh.to.mosti.notifier.NotificationType;
 
 import java.util.List;
 

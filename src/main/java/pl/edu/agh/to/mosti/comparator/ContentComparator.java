@@ -1,13 +1,17 @@
 package pl.edu.agh.to.mosti.comparator;
 
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.edu.agh.to.mosti.comparator.model.Notification;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
-import pl.edu.agh.to.mosti.notifier.Notifier;
+import pl.edu.agh.to.mosti.notifier.*;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Component
 public final class ContentComparator implements Comparator {
@@ -15,7 +19,7 @@ public final class ContentComparator implements Comparator {
     private final SectionService sectionService;
     private final SectionSnapshotService sectionSnapshotService;
 
-    private Notifier notifier;
+    private INotifier notifier;
 
     @Autowired
     public ContentComparator(SectionService sectionService,
@@ -42,13 +46,32 @@ public final class ContentComparator implements Comparator {
             sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, newContent, new Date()));
 
             if (notifier != null && previousContent != null) {
-                // use notifier
+                try {
+                    notifier.notify(buildNotificationRequest(section, previousContent, newContent));
+                } catch (InvalidNotificationType invalidNotificationType) {
+                    invalidNotificationType.printStackTrace();
+                }
             }
         }
     }
 
+    private NotificationRequest buildNotificationRequest(Section section, String previousContent, String newContent) {
+        PageChange pageChange = new PageChange();
+        pageChange.setUrl(section.getUrl());
+        pageChange.setTitle(section.getAlias());
+        pageChange.setOldValue(previousContent);
+        pageChange.setNewValue(newContent);
+
+        List<Pair<NotificationType, String>> notifications = new LinkedList<>();
+        for (Notification notification : section.getNotifications()) {
+            notifications.add(new Pair<>(notification.getNotificationType(), notification.getContactInfo()));
+        }
+
+        return new NotificationRequest(pageChange, notifications);
+    }
+
     @Override
-    public void setNotifier(Notifier notifier) {
+    public void setNotifier(INotifier notifier) {
         this.notifier = notifier;
     }
 }
