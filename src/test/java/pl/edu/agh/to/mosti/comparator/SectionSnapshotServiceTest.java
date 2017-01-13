@@ -1,9 +1,6 @@
 package pl.edu.agh.to.mosti.comparator;
 
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,10 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.to.mosti.Application;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
-import java.util.Comparator;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,9 +22,10 @@ import static org.junit.Assert.assertEquals;
 @Transactional
 public class SectionSnapshotServiceTest {
 
-    class sectionSnapshotComparator implements Comparator<SectionSnapshot> {
-        public int compare(SectionSnapshot sectionSnapshot1, SectionSnapshot sectionSnapshot2) {
-            return sectionSnapshot2.getDate().compareTo(sectionSnapshot1.getDate());
+    class SectionSnapshotDateComparator implements Comparator<SectionSnapshot> {
+        @Override
+        public int compare(SectionSnapshot firstSnapshot, SectionSnapshot secondSnapshot) {
+            return secondSnapshot.getDate().compareTo(firstSnapshot.getDate());
         }
     }
 
@@ -39,16 +35,14 @@ public class SectionSnapshotServiceTest {
     @Autowired
     private SectionService sectionService;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void sectionSnapshotServiceShouldReturnLatestSectionSnapshot() {
 
-        //before
+        // given
         Section section = sectionService.saveOrUpdateSection(new Section(
-                "url_", "alias_", "selector_", "contact_", 0
+                "url", "alias", "selector", 0, null
         ));
+
         for (int i = 0; i < 5; i++) {
             sectionSnapshotService.saveSnapshot(new SectionSnapshot(
                     section, "content" + i, new Date()
@@ -57,37 +51,30 @@ public class SectionSnapshotServiceTest {
 
         // when
         SectionSnapshot sectionSnapshot = sectionSnapshotService.getLatestSectionSnapshot(section);
-
         List<SectionSnapshot> sectionSnapshotList = sectionSnapshotService.findBySectionId(section.getId());
 
-        sectionSnapshotList.sort(new sectionSnapshotComparator());
-
-        SectionSnapshot sectionSnapshotMirror = sectionSnapshotList.get(0);
+        sectionSnapshotList.sort(new SectionSnapshotDateComparator());
 
         // then
-        assertEquals(sectionSnapshot, sectionSnapshotMirror);
+        assertEquals(sectionSnapshot, sectionSnapshotList.get(0));
     }
 
     @Test
     public void sectionSnapshotServiceShouldReturnProperSectionSnapshot() throws Exception {
-
-        //given
+        // given
         List<SectionSnapshot> testSectionSnapshots = new LinkedList<>();
         Section section = sectionService.saveOrUpdateSection(new Section(
-                "url_", "alias_", "selector_", "contact_", 0
+                "url_", "alias_", "selector_", 0, null
         ));
+
         for (int i = 0; i < 5; i++) {
-            testSectionSnapshots.add(new SectionSnapshot(section, "content" + i, new Date()));
-            sectionSnapshotService.saveSnapshot(testSectionSnapshots.get(i));
-
-
+            testSectionSnapshots.add(sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, "content" + i, new Date())));
         }
 
         // when
-        List <SectionSnapshot> testSectionSnapshotMirror = sectionSnapshotService.findBySectionId(section.getId());
-
+        List <SectionSnapshot> testSectionSnapshotsMirror = sectionSnapshotService.findBySectionId(section.getId());
 
         // then
-        assertEquals(testSectionSnapshots, testSectionSnapshotMirror);
+        assertEquals(testSectionSnapshots, testSectionSnapshotsMirror);
     }
 }

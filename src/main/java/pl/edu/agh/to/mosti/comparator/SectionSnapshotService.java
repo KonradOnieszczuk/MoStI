@@ -20,8 +20,8 @@ public class SectionSnapshotService {
         return sectionSnapshotDao.findFirstBySectionIdOrderByDateDesc(section.getId());
     }
 
-    void saveSnapshot(SectionSnapshot sectionSnapshot) {
-        sectionSnapshotDao.save(sectionSnapshot);
+    SectionSnapshot saveSnapshot(SectionSnapshot sectionSnapshot) {
+        return sectionSnapshotDao.save(sectionSnapshot);
     }
 
     public List<SectionSnapshot> findBySectionId(long id) {

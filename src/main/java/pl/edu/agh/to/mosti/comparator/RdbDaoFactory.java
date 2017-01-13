@@ -10,6 +10,7 @@ class RdbDaoFactory extends DaoFactory {
 
     @Autowired private RdbSectionDao rdbSectionDao;
     @Autowired private RdbSectionSnapshotDao rdbSectionSnapshotDao;
+    @Autowired private RdbNotificationDao rdbNotificationDao;
 
     @Bean @Primary
     @Override
@@ -21,5 +22,11 @@ class RdbDaoFactory extends DaoFactory {
     @Override
     protected SectionSnapshotDao getSectionSnapshotDao() {
         return rdbSectionSnapshotDao;
+    }
+
+    @Bean @Primary
+    @Override
+    protected NotificationDao getNotificationDao() {
+        return rdbNotificationDao;
     }
 }

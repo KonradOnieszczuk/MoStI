@@ -1,8 +1,5 @@
 package pl.edu.agh.to.mosti.comparator.model;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableBooleanValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +13,7 @@ import java.util.List;
 public class Section {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String url;
@@ -24,20 +21,21 @@ public class Section {
     private String selector;
     private int interval;
 
-    // For the first iteration we're supporting only EMAIL notification type.
-    // This field holds e-mail address to send notifications to.
-    private String contactInfo;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "section")
     private List<SectionSnapshot> sectionSnapshot = new LinkedList<>();
 
-    public Section(String url, String alias, String selector,
-                   String contactInfo, int interval) {
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "section_notification",
+            joinColumns = @JoinColumn(name = "section_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id", referencedColumnName = "id"))
+    private List<Notification> notifications;
+
+    public Section(String url, String alias, String selector,int interval, List<Notification> notifications) {
         this.url = url;
         this.alias = alias;
         this.selector = selector;
-        this.contactInfo = contactInfo;
         this.interval = interval;
+        this.notifications = notifications;
     }
 
 }

@@ -42,7 +42,7 @@ public class ComparatorTest {
     @Before
     public void addTestData() {
         for (int i = 0; i < 5; i++) {
-            Section section = new Section("url_" + i, "alias_" + i, "selector_" + i, "contact_" + i, 0);
+            Section section = new Section("url_" + i, "alias_" + i, "selector_" + i, 0, null);
 
             List<SectionSnapshot> sectionSnapshots = new LinkedList<>();
 
