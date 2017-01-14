@@ -10,8 +10,8 @@ public class NotificationSenderFactory implements SenderFactory {
 
         if( type.equals(NotificationType.email) ) {
             return injector.getInstance(EmailSender.class);
-        } else if (type.equals(NotificationType.hangout)){
-            return new HangoutsSender();
+        } else if (type.equals(NotificationType.sms)){
+            return new SMSSender();
         }
         // return statement needed - throw exception instead of return null
         throw new InvalidNotificationType(type);
