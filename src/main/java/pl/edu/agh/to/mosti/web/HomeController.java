@@ -1,14 +1,20 @@
 package pl.edu.agh.to.mosti.web;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.agh.to.mosti.comparator.Comparator;
 import pl.edu.agh.to.mosti.comparator.SectionService;
 import pl.edu.agh.to.mosti.comparator.model.Notification;
 import pl.edu.agh.to.mosti.comparator.model.Section;
+import pl.edu.agh.to.mosti.notifier.INotifier;
+import pl.edu.agh.to.mosti.notifier.Notifier;
+import pl.edu.agh.to.mosti.notifier.NotifierInjector;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
@@ -69,5 +75,20 @@ public class HomeController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteSection(@PathVariable("id") long id) {
         sectionService.deleteSection(sectionService.getSectionById(id));
+    }
+
+    // METHOD FOR DEMO PURPOSES
+
+    @Autowired
+    Comparator comparator;
+
+    @RequestMapping(value = "/trigger-change")
+    @ResponseStatus(HttpStatus.OK)
+    public void triggerChange(@RequestParam(name = "id") Long id, @RequestParam(name = "newContent") String newContent) {
+        Injector injector = Guice.createInjector(new NotifierInjector());
+        INotifier notifier = injector.getInstance(Notifier.class);
+
+        comparator.setNotifier(notifier);
+        comparator.compare(id, newContent);
     }
 }
