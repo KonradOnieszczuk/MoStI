@@ -40,14 +40,14 @@ public final class ContentComparator implements Comparator {
         }
 
         SectionSnapshot sectionSnapshot = sectionSnapshotService.getLatestSectionSnapshot(section);
-        String previousContent = sectionSnapshot != null ? sectionSnapshot.getContent() : null;
+        String oldContent = sectionSnapshot != null ? sectionSnapshot.getContent() : null;
 
-        if (!newContent.equals(previousContent)) {
+        if (!newContent.equals(oldContent)) {
             sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, newContent, new Date()));
 
-            if (notifier != null && previousContent != null) {
+            if (notifier != null && oldContent != null) {
                 try {
-                    notifier.notify(buildNotificationRequest(section, previousContent, newContent));
+                    notifier.notify(buildNotificationRequest(section, oldContent, newContent));
                 } catch (InvalidNotificationType invalidNotificationType) {
                     invalidNotificationType.printStackTrace();
                 }
@@ -55,11 +55,11 @@ public final class ContentComparator implements Comparator {
         }
     }
 
-    private NotificationRequest buildNotificationRequest(Section section, String previousContent, String newContent) {
+    private NotificationRequest buildNotificationRequest(Section section, String oldContent, String newContent) {
         PageChange pageChange = new PageChange();
         pageChange.setUrl(section.getUrl());
         pageChange.setTitle(section.getAlias());
-        pageChange.setOldValue(previousContent);
+        pageChange.setOldValue(oldContent);
         pageChange.setNewValue(newContent);
 
         List<Pair<NotificationType, String>> notifications = new LinkedList<>();
