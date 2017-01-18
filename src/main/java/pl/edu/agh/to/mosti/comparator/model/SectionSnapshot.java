@@ -22,9 +22,9 @@ public class SectionSnapshot {
     @JoinColumn(name = "section_id")
     private Section section;
 
-    public SectionSnapshot(Section section, String content, Date date) {
+    public SectionSnapshot(Section section, String content) {
         this.section = section;
         this.content = content;
-        this.date = date;
+        this.date = new Date();
     }
 }

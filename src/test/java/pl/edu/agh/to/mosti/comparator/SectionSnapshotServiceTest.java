@@ -11,7 +11,6 @@ import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 
 import java.util.Comparator;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class SectionSnapshotServiceTest {
 
         for (int i = 0; i < 5; i++) {
             sectionSnapshotService.saveSnapshot(new SectionSnapshot(
-                    section, "content" + i, new Date()
+                    section, "content" + i
             ));
         }
 
@@ -68,7 +67,7 @@ public class SectionSnapshotServiceTest {
         ));
 
         for (int i = 0; i < 5; i++) {
-            testSectionSnapshots.add(sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, "content" + i, new Date())));
+            testSectionSnapshots.add(sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, "content" + i)));
         }
 
         // when

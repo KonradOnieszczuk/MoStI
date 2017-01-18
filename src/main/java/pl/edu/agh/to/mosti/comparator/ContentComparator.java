@@ -9,7 +9,6 @@ import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 import pl.edu.agh.to.mosti.notifier.*;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,7 +42,7 @@ public final class ContentComparator implements Comparator {
         String oldContent = sectionSnapshot != null ? sectionSnapshot.getContent() : null;
 
         if (!newContent.equals(oldContent)) {
-            sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, newContent, new Date()));
+            sectionSnapshotService.saveSnapshot(new SectionSnapshot(section, newContent));
 
             if (notifier != null && oldContent != null) {
                 try {

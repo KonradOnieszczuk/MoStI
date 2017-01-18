@@ -13,7 +13,6 @@ import pl.edu.agh.to.mosti.Application;
 import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.model.SectionSnapshot;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class ComparatorTest {
             List<SectionSnapshot> sectionSnapshots = new LinkedList<>();
 
             for (int j = 0; j < 3 && i != 4; j++) {
-                sectionSnapshots.add(new SectionSnapshot(section, "content_" + i + "_" + j, new Date(2016, 0, j)));
+                sectionSnapshots.add(new SectionSnapshot(section, "content_" + i + "_" + j));
             }
 
             section.setSectionSnapshot(sectionSnapshots);
