@@ -22,9 +22,11 @@ public final class ContentComparator implements Comparator {
 
     @Autowired
     public ContentComparator(SectionService sectionService,
-                             SectionSnapshotService sectionSnapshotService) {
+                             SectionSnapshotService sectionSnapshotService,
+                             INotifier notifier) {
         this.sectionService = sectionService;
         this.sectionSnapshotService = sectionSnapshotService;
+        this.notifier = notifier;
     }
 
     @Override
@@ -46,7 +48,7 @@ public final class ContentComparator implements Comparator {
 
             if (notifier != null && oldContent != null) {
                 try {
-                    notifier.notify(buildNotificationRequest(section, oldContent, newContent));
+                    notifier.notify(section, oldContent, newContent);
                 } catch (InvalidNotificationType invalidNotificationType) {
                     invalidNotificationType.printStackTrace();
                 }
@@ -67,11 +69,5 @@ public final class ContentComparator implements Comparator {
         }
 
         return new NotificationRequest(pageChange, notifications);
-    }
-
-    @Override
-    @Autowired
-    public void setNotifier(INotifier notifier) {
-        this.notifier = notifier;
     }
 }

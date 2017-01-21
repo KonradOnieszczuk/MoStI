@@ -9,8 +9,12 @@ import pl.edu.agh.to.mosti.comparator.model.Section;
 @Component
 public class Notifier implements INotifier{
 
+    SenderFactory senderFactory;
+
     @Autowired
-    NotificationSenderFactory senderFactory;
+    public Notifier(SenderFactory senderFactory){
+        this.senderFactory = senderFactory;
+    }
 
     /** Takes {@link Section} and notifies user using all requested notification methods */
     public void notify (Section section, String currentContent, String previousContent) throws InvalidNotificationType {

@@ -52,7 +52,7 @@ public class NotifierTest {
         emailSender.sendNotification(pageChange, "testaddress");
 
     }
-
+/*
     @Test
     public void requestTest() throws InvalidNotificationType {
         Injector injector = Guice.createInjector(new TestInjector());
@@ -71,7 +71,7 @@ public class NotifierTest {
 
         notifier.notify(request);
     }
-
+*/
     @Test
     public void senderFactoryTest() throws InvalidNotificationType {
         NotificationSenderFactory factory = new NotificationSenderFactory();

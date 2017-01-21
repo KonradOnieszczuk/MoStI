@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public final class SectionService {
+public class SectionService {
     private final SectionDao sectionDao;
     private final NotificationDao notificationDao;
 
