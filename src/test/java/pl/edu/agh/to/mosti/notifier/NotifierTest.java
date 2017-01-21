@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.edu.agh.to.mosti.Application;
+import pl.edu.agh.to.mosti.comparator.model.Notification;
+import pl.edu.agh.to.mosti.comparator.model.Section;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -25,13 +28,15 @@ public class NotifierTest {
     @Autowired
     Notifier notifier;
 
-    //@Test
+    @Test
     public void fullNotification() throws InvalidNotificationType {
         List<Pair<NotificationType, String>> notificationTypes = new ArrayList<>();
         notificationTypes.add(new Pair<>(NotificationType.email, "testaddress"));
         NotificationRequest request = new NotificationRequest(new PageChange(), notificationTypes);
         System.out.println("Notifier " + notifier);
-        notifier.notify(request);
+        Section section = new Section("url", "title", "select", 2, Arrays.asList(new Notification
+                (NotificationType.email, "testaddress")));
+        notifier.notify(section, "nowe", "stare");
     }
 
     @Test
