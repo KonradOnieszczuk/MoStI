@@ -1,8 +1,6 @@
 package pl.edu.agh.to.mosti.comparator.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.edu.agh.to.mosti.notifier.NotificationType;
 
 import javax.persistence.*;
@@ -11,7 +9,6 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(exclude = { "sections" })
-@NoArgsConstructor
 public class Notification {
 
     @Id
@@ -26,8 +23,45 @@ public class Notification {
 
     private String contactInfo;
 
+    public Notification() {
+        this.notificationType = null;
+        this.contactInfo = null;
+    }
+
     public Notification(NotificationType notificationType, String contactInfo) {
         this.notificationType = notificationType;
+        this.contactInfo = contactInfo;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public List<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
+    }
+
+    public NotificationType getNotificationType() {
+        return notificationType;
+    }
+
+    public void setNotificationType(NotificationType notificationType) {
+        this.notificationType = notificationType;
+    }
+
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
     }
 }
