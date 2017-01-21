@@ -8,25 +8,25 @@ import java.io.IOException;
 
 public class StaticFetcher implements Fetcher {
 
-    private ResultFormatter formatter = new ResultFormatter();
-
-    public FetchResult fetch(FetchRequest fetchRequest) throws FetcherException {
+    public FetchResult fetch(FetchRequest fetchRequest) throws FetchException {
 
         try
         {
             Document doc = Jsoup.connect(fetchRequest.getURL()).get();
             Elements elements = doc.select(fetchRequest.getSelector());
 
-            String text = formatter.format( elements );
+            if ( elements.isEmpty() ) {
+                throw new FetchException("StaticFetcher element not found");
+            }
 
             FetchResult result = new FetchResult();
-            result.setText( text );
+            result.setText(elements.first().text());
             return result;
 
         } catch (IOException e) {
-            throw new FetcherException("StaticFetcher IOException occurred: " +  e.getMessage());
+            throw new FetchException("StaticFetcher IOException occurred: " +  e.getMessage());
         } catch (Exception e) {
-            throw new FetcherException("StaticFetcher Exception occurred: " +  e.getMessage());
+            throw new FetchException("StaticFetcher Exception occurred: " +  e.getMessage());
         }
     }
 }

@@ -2,42 +2,38 @@ package pl.edu.agh.to.mosti.fetcher;
 
 import java.util.List;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.to.mosti.comparator.Comparator;
-import pl.edu.agh.to.mosti.comparator.model.Section;
 import pl.edu.agh.to.mosti.comparator.SectionService;
-import pl.edu.agh.to.mosti.notifier.Notifier;
-import pl.edu.agh.to.mosti.notifier.NotifierInjector;
+import pl.edu.agh.to.mosti.comparator.model.Section;
 
 @Component
 @Transactional
 public class UserDataProvider {
 
-    private SectionService sectionService;
+    private SectionService service;
     private Comparator comparator;
+    private Decider decider;
 
     private IntervalController controller = new IntervalController();
-    private Decider decider = new Decider();
 
-    @Autowired
-    public UserDataProvider(SectionService sectionService, Comparator comparator) {
-        this.sectionService = sectionService;
-        this.comparator = comparator;
-
-        this.decider = new Decider();
-        this.decider.register( new StaticFetcher() );
-        this.decider.register( new DynamicFetcher() );
+    public void setDecider(Decider decider) {
+        this.decider = decider;
     }
 
-    @Scheduled(fixedRate=200)
-    public void ProcessFetch(){
+    @Autowired
+    public UserDataProvider(SectionService service, Comparator comparator) {
+        this.service = service;
+        this.comparator = comparator;
+    }
 
-        List <Section> sections = sectionService.getAllSections();
+    @Scheduled(fixedRate=500)
+    public void process(){
+
+        List <Section> sections = service.getAllSections();
 
         for ( final Section section : sections ) {
 
@@ -56,7 +52,7 @@ public class UserDataProvider {
 
                     controller.setCheckpoint( section.getId() );
 
-                } catch (FetcherException e) {
+                } catch (FetchException e) {
                     System.out.println("Decider exception: " + e.getMessage() );
                 }
             }

@@ -6,9 +6,6 @@ public class FetchRequest {
     private String selector;
     private int interval;
 
-    public FetchRequest() {
-    }
-
     public String getURL() {
         return URL;
     }
