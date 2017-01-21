@@ -4,6 +4,11 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import javafx.util.Pair;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import pl.edu.agh.to.mosti.Application;
 
 
 import java.util.ArrayList;
@@ -14,7 +19,21 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = Application.class)
 public class NotifierTest {
+    @Autowired
+    Notifier notifier;
+
+    //@Test
+    public void fullNotification() throws InvalidNotificationType {
+        List<Pair<NotificationType, String>> notificationTypes = new ArrayList<>();
+        notificationTypes.add(new Pair<>(NotificationType.email, "testaddress"));
+        NotificationRequest request = new NotificationRequest(new PageChange(), notificationTypes);
+        System.out.println("Notifier " + notifier);
+        notifier.notify(request);
+    }
+
     @Test
     public void emailNotificationTest(){
         Injector injector = Guice.createInjector(new TestInjector());

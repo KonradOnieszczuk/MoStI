@@ -14,7 +14,5 @@ public class TestInjector extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(TransportFactory.class).to(MockTransportFactory.class);
-        bind(SenderFactory.class).to(MockSenderFactory.class);
     }
 }

@@ -1,19 +1,27 @@
 package pl.edu.agh.to.mosti.notifier;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+@Component
 public class NotificationSenderFactory implements SenderFactory {
 
-    public NotificationSender provideNotificationSender(NotificationType type) throws InvalidNotificationType {
-        Injector injector = Guice.createInjector(new NotifierInjector());
+    private List<NotificationSender> notificationSenders;
 
-        if( type.equals(NotificationType.email) ) {
-            return injector.getInstance(EmailSender.class);
-        } else if (type.equals(NotificationType.sms)){
-            return new SMSSender();
+    @Autowired
+    public void setNotificationSenders(List<NotificationSender> notificationSenders){
+        this.notificationSenders = notificationSenders;
+    }
+
+    public NotificationSender provideNotificationSender(NotificationType type) throws InvalidNotificationType {
+
+        for( NotificationSender sender : notificationSenders ){
+            if(sender.getSupportedType().equals(type)){
+                return sender;
+            }
         }
-        // return statement needed - throw exception instead of return null
         throw new InvalidNotificationType(type);
     }
 }

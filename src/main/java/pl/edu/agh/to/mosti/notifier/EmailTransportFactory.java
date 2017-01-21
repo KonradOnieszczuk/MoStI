@@ -1,12 +1,15 @@
 package pl.edu.agh.to.mosti.notifier;
 
+import org.springframework.stereotype.Component;
+
 import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import java.util.Properties;
 
-public class EmailTransportFactory implements TransportFactory {
+@Component
+public class EmailTransportFactory{
     private Session session;
     private Transport transport;
 

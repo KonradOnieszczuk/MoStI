@@ -1,5 +1,7 @@
 package pl.edu.agh.to.mosti.notifier;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+@Component
 public class SMSSender implements NotificationSender {
 
     public void sendNotification(PageChange pageChange, String phoneNumber) {
@@ -20,6 +23,11 @@ public class SMSSender implements NotificationSender {
         } catch(IOException e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public NotificationType getSupportedType() {
+        return NotificationType.sms;
     }
 
     private void sendPostRequest(String url, String login, String pass, String recipient, String message, String sender, String msg_type, String encoding, String unicode, String sandbox) throws IOException{

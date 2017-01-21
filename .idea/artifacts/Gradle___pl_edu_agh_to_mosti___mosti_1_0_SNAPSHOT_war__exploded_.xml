@@ -22,7 +22,6 @@
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-thymeleaf:1.4.2.RELEASE" />
           <element id="library" level="project" name="Gradle: com.h2database:h2:1.4.193" />
           <element id="library" level="project" name="Gradle: org.mockito:mockito-all:1.8.4" />
-          <element id="library" level="project" name="Gradle: com.google.inject:guice:3.0" />
           <element id="library" level="project" name="Gradle: javax.mail:mail:1.4" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-test:1.4.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-test-autoconfigure:1.4.2.RELEASE" />
@@ -46,9 +45,6 @@
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.thymeleaf:thymeleaf-spring4:2.1.5.RELEASE" />
           <element id="library" level="project" name="Gradle: nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.4.0" />
-          <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
-          <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
-          <element id="library" level="project" name="Gradle: org.sonatype.sisu.inject:cglib:2.2.1-v20090111" />
           <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot:1.4.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:1.4.2.RELEASE" />
@@ -82,7 +78,6 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.thymeleaf:thymeleaf:2.1.5.RELEASE" />
           <element id="library" level="project" name="Gradle: org.codehaus.groovy:groovy:2.4.7" />
-          <element id="library" level="project" name="Gradle: asm:asm:3.1" />
           <element id="library" level="project" name="Gradle: net.minidev:accessors-smart:1.1" />
           <element id="library" level="project" name="Gradle: ch.qos.logback:logback-classic:1.1.7" />
           <element id="library" level="project" name="Gradle: org.slf4j:jul-to-slf4j:1.7.21" />

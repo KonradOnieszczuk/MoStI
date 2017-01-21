@@ -1,6 +1,7 @@
 package pl.edu.agh.to.mosti.notifier;
 
-import com.google.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -9,12 +10,13 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+@Component
 public class EmailSender implements NotificationSender {
 
-    private TransportFactory emailTransportFactory;
+    private EmailTransportFactory emailTransportFactory;
 
-    @Inject
-    public void setTransportFactory(TransportFactory transportFactory){
+    @Autowired
+    public void setTransportFactory(EmailTransportFactory transportFactory){
         this.emailTransportFactory = transportFactory;
     }
 
@@ -45,6 +47,11 @@ public class EmailSender implements NotificationSender {
         }
     }
 
+    @Override
+    public NotificationType getSupportedType() {
+        return NotificationType.email;
+    }
+
     /** Formats message to be sent out */
     private String getMessage (PageChange pageChange) {
         StringBuilder message = new StringBuilder("Hello,\n");
@@ -53,9 +60,5 @@ public class EmailSender implements NotificationSender {
                 + "to " + pageChange.getNewValue() + "\n");
         message.append("To change the notification options go to the MoStI page");
         return message.toString();
-    }
-
-    public TransportFactory getTransportFactory(){
-        return emailTransportFactory;
     }
 }

@@ -8,10 +8,9 @@ import java.util.Properties;
 
 import static org.mockito.Mockito.mock;
 
-public class MockTransportFactory implements TransportFactory {
+public class MockTransportFactory {
     Transport transport;
 
-    @Override
     public Transport getTransport() throws NoSuchProviderException {
         if(transport == null){
             Transport transport = mock(Transport.class);
@@ -20,7 +19,6 @@ public class MockTransportFactory implements TransportFactory {
         return transport;
     }
 
-    @Override
     public Session getSession() {
         Session session = Session.getDefaultInstance(new Properties());
         return session;

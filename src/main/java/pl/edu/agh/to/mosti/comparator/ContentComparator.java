@@ -70,6 +70,7 @@ public final class ContentComparator implements Comparator {
     }
 
     @Override
+    @Autowired
     public void setNotifier(INotifier notifier) {
         this.notifier = notifier;
     }
