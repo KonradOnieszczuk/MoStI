@@ -1,12 +1,15 @@
 package pl.edu.agh.to.mosti.notifier;
 
-import javafx.util.Pair;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class PageChange {
     private String title;
+
+    public PageChange(String title, String url, String oldValue, String newValue) {
+        this.title = title;
+        this.url = url;
+        this.oldValue = oldValue;
+        this.newValue = newValue;
+    }
+
     private String url;
     private String oldValue;
     private String newValue;
@@ -15,31 +18,15 @@ public class PageChange {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getOldValue() {
         return oldValue;
-    }
-
-    public void setOldValue(String oldValue) {
-        this.oldValue = oldValue;
     }
 
     public String getNewValue() {
         return newValue;
     }
 
-    public void setNewValue(String newValue) {
-        this.newValue = newValue;
+    public String getUrl() {
+        return url;
     }
 }

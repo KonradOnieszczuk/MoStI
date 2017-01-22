@@ -32,15 +32,13 @@ public class EmailSender implements NotificationSender {
             email.setFrom(new InternetAddress(username));
             email.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(address));
-            email.setSubject("Testing Notification");
+            email.setSubject("MoStI notification - change in " + pageChange.getTitle());
             email.setText(getMessage(pageChange));
 
             Transport transport = emailTransportFactory.getTransport();
             transport.connect();
             transport.sendMessage(email, email.getAllRecipients());
             transport.close();
-
-            System.out.println("Done");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
@@ -58,7 +56,7 @@ public class EmailSender implements NotificationSender {
         message.append("This message is to notify you of a change in page " + pageChange.getTitle() + "\n");
         message.append("The value you observed has changed from " + pageChange.getOldValue()
                 + "to " + pageChange.getNewValue() + "\n");
-        message.append("To change the notification options go to the MoStI page");
+        message.append("To change the notification options go to the MoStI home page.");
         return message.toString();
     }
 }
