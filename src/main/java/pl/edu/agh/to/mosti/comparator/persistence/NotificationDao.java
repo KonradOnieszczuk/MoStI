@@ -1,4 +1,4 @@
-package pl.edu.agh.to.mosti.comparator;
+package pl.edu.agh.to.mosti.comparator.persistence;
 
 import pl.edu.agh.to.mosti.comparator.model.Notification;
 import pl.edu.agh.to.mosti.notifier.NotificationType;

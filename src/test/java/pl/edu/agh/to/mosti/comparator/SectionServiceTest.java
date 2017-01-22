@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class)
@@ -54,13 +55,16 @@ public class SectionServiceTest {
         assertEquals(testSection, fetchedSection);
     }
 
-    @Test(expected = EntityNotFoundException.class)
-    public void sectionServiceShouldThrowEntityNotFoundExceptionWhenSectionDoesNotExist() {
+    @Test
+    public void sectionServiceShouldReturnNullValueWhenSectionDoesNotExist() {
         // given
         long sectionId = -1;
 
         // when
-        sectionService.getSectionById(sectionId).getId();
+        Section section = sectionService.getSectionById(sectionId);
+
+        // then
+        assertNull(section);
     }
 
     @Test

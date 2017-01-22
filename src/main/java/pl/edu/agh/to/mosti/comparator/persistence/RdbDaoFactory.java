@@ -1,4 +1,4 @@
-package pl.edu.agh.to.mosti.comparator;
+package pl.edu.agh.to.mosti.comparator.persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

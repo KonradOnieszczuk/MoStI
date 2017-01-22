@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.to.mosti.comparator.model.Notification;
 import pl.edu.agh.to.mosti.comparator.model.Section;
+import pl.edu.agh.to.mosti.comparator.persistence.NotificationDao;
+import pl.edu.agh.to.mosti.comparator.persistence.SectionDao;
 
 import java.util.LinkedList;
 import java.util.List;
 
 @Service
-public final class SectionService {
+public class SectionService {
     private final SectionDao sectionDao;
     private final NotificationDao notificationDao;
 
@@ -20,7 +22,7 @@ public final class SectionService {
     }
 
     public Section getSectionById(long id) {
-        return sectionDao.getOne(id);
+        return sectionDao.findOne(id);
     }
 
     public List<Section> getAllSections() {
